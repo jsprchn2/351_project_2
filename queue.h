@@ -14,9 +14,9 @@ procQueue* createProcQueue(int length)
 {
 	procQueue *q;
 
-	q = malloc(sizeof(procQueue));
+	q = (procQueue*)malloc(sizeof(procQueue));
 
-	q->elements = malloc(sizeof(Process) * length);
+	q->elements = (Process**)malloc(sizeof(Process) * length);
 	q->size = 0;
 	q->capacity = length;
 	q->front = 0;
@@ -47,8 +47,12 @@ void enqueueProc(procQueue* q, Process* proc)
 
 int queueNext(procQueue* q)
 {
-	if (!queueNext(q))
-	{
+	return q->size == 0 ? 0 : 1;
+}
+
+Process* peekQueue(procQueue* q)
+{
+	if (!queueNext(q)) {
 		printf("ERROR: queue is empty\n");
 		exit(2);
 	}
