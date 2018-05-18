@@ -21,9 +21,9 @@ frameList* createFrameList(int numOfFrames, int pageSize)
 {
 	frameList *f;
 
-	f = malloc(sizeof(frameList));
+	f = (frameList*)malloc(sizeof(frameList));
 
-	f->frames = (Frame*)malloc(sizeof(Frame)) *numOfFrames);
+	f->frames = (Frame*)malloc(sizeof(Frame) * numOfFrames);
 	f->pageSize = pageSize;
 	f->numOfFrames = numOfFrames;
 
@@ -79,7 +79,7 @@ void fitProcMemory(frameList* list, Process* proc)
 
 void printFrameList(frameList* list)
 {
-	int inFreeBlock = 0, start;
+	int i, inFreeBlock = 0, start;
 
 	printf("\tMemory map:\n");
 
@@ -112,7 +112,7 @@ void printFrameList(frameList* list)
 	{
 		printf("\t\t%d-%d: Free frame(s)\n",
 			start * list->pageSize,
-			((i)* list->pageSize) - 1);
+			((i) * list->pageSize) - 1);
 	}
 }
 
